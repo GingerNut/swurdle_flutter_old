@@ -2,6 +2,7 @@
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:swurdle_flutter/main.dart';
 
 class GameBoard extends CustomPainter {
   @override
@@ -10,7 +11,7 @@ class GameBoard extends CustomPainter {
     var gradient = RadialGradient(
       center: const Alignment(0.7, -0.6),
       radius: 0.2,
-      colors: [const Color(0xFFFFFF00), const Color(0xFF0099FF)],
+      colors: [const Color(0xFFFFFF00), const Color(baize)],
       stops: [0.4, 1.0],
     );
     canvas.drawRect(
