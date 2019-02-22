@@ -5,55 +5,42 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:swurdle_flutter/game_hexagon.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
+import 'package:spritewidget/spritewidget.dart';
 
 class GameBoard extends StatefulWidget {
 
-  final Game game;
+  final Position position;
 
-  GameBoard(this.game);
+  GameBoard(this.position);
 
   @override
-  _GameBoardState createState() => _GameBoardState(game);
+  GameBoardState createState() => new GameBoardState(position);
 }
 
-class _GameBoardState extends State<GameBoard> {
+class GameBoardState extends State<GameBoard> {
+  NodeWithSize rootNode;
 
-  Game game;
-  int size;
+  Position position;
 
-  _GameBoardState(this.game){
-    size = 7;
+  GameBoardState(this.position);
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    rootNode = new NodeWithSize(const Size(1024.0, 1024.0));
+    rootNode.position = Offset(512, 512);
+
+    Hexagon hexagon = new Hexagon(position, position.tiles[0]);
+    hexagon.position = const Offset(-300,0);
+
+    rootNode.addChild(hexagon);
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-
-      body:
-      new Container(
-        decoration: new BoxDecoration(color: Colors.grey),
-        child: new Row(
-          children: <Widget>[
-
-            new Column(
-              children: <Widget>[
-
-                new GameHexagon(game.position, game.board.tiles[0]),
-                new GameHexagon(game.position, game.board.tiles[1]),
-              ],
-            ),
-
-            new Column(
-              children: <Widget>[
-                new GameHexagon(game.position, game.board.tiles[1]),
-                new GameHexagon(game.position, game.board.tiles[1]),
-              ],
-            )
-
-          ],
-        ),
-      )
-
-    );
+    return new SpriteWidget(rootNode);
   }
+
 }

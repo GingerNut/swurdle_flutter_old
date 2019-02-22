@@ -4,32 +4,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:swurdle_flutter/main.dart';
+import 'package:spritewidget/spritewidget.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
-class GameHexagon extends StatefulWidget{
+class Hexagon extends Node {
 
-  final Position position;
+  final Position pos;
   final Tile tile;
 
-  GameHexagon(this.position, this.tile);
+  Hexagon(this.pos, this.tile);
+
+  double radius = 30;
 
   @override
-  _GameHexagonState createState() => _GameHexagonState(position, tile);
-}
+  void paint(Canvas canvas) {
+    canvas.drawCircle(
+        Offset.zero,
+        radius,
+        new Paint()..color = const Color(0xffff0000)
 
-class _GameHexagonState extends State<GameHexagon> {
-
-  Position position;
-  Tile tile;
-
-  _GameHexagonState(this.position, this.tile);
-
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-      decoration: new BoxDecoration(color: Colors.red),
-      child: new Text(position.letter(tile.i, tile.j)),
     );
   }
 }
