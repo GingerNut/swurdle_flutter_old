@@ -3,17 +3,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:swurdle_flutter/game_board.dart';
+import 'package:swurdlelogic/swurdlelogic.dart';
 
 
 
 class GameScreen extends StatefulWidget {
-  GameScreen({Key key}) : super(key: key);
+
+  final Game game;
+
+  GameScreen(this. game, {Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MyHomePageState createState() => new _MyHomePageState(game);
 }
 
 class _MyHomePageState extends State<GameScreen> {
+
+  Game game;
+
+  _MyHomePageState(this.game);
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -21,12 +30,7 @@ class _MyHomePageState extends State<GameScreen> {
         title: new Text('Swurdle'),
       ),
       body:
-      new CustomPaint(
-        painter: GameBoard(),
-        child: Center(
-
-        ),
-      ),
+      new GameBoard(game),
 
     );
   }

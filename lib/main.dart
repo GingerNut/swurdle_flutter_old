@@ -8,14 +8,20 @@ const baize = 0xFF2e8b57;
 
 main()  {
 
-  runApp(MyApp());
+  game = new Game();
+
+  runApp(MyApp(game));
 }
 
+Tile tile;
 Game game;
 
 
 class MyApp extends StatelessWidget {
 
+  final Game game;
+
+  MyApp(this.game);
 
 
   @override
@@ -28,7 +34,7 @@ class MyApp extends StatelessWidget {
         accentColor: const Color(0xFF4caf50),
         canvasColor: const Color(0xFFfafafa),
       ),
-      home: new GameScreen(),
+      home: new GameScreen(game),
     );
   }
 }
