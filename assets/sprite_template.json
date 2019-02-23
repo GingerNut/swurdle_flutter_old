@@ -1,0 +1,108 @@
+{"frames": [
+
+{
+	"filename": "baize.png",
+	"frame": {"x":1,"y":1,"w":700,"h":699},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":700,"h":699},
+	"sourceSize": {"w":700,"h":699}
+},
+{
+	"filename": "hexagon_beige.png",
+	"frame": {"x":703,"y":286,"w":121,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "hexagon_blue.png",
+	"frame": {"x":703,"y":416,"w":121,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "hexagon_brown.png",
+	"frame": {"x":703,"y":546,"w":121,"h":128},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "hexagon_green.png",
+	"frame": {"x":826,"y":286,"w":121,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "hexagon_grey.png",
+	"frame": {"x":826,"y":416,"w":121,"h":128},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "hexagon_pink.png",
+	"frame": {"x":833,"y":539,"w":121,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "hexagon_red.png",
+	"frame": {"x":703,"y":669,"w":121,"h":128},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "hexagon_yellow.png",
+	"frame": {"x":833,"y":669,"w":121,"h":128},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "star_blue.png",
+	"frame": {"x":1,"y":702,"w":111,"h":127},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":111,"h":127},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "star_red.png",
+	"frame": {"x":130,"y":702,"w":111,"h":127},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":111,"h":127},
+	"sourceSize": {"w":128,"h":128}
+},
+{
+	"filename": "swurl.png",
+	"frame": {"x":703,"y":1,"w":269,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":26,"y":17,"w":269,"h":283},
+	"sourceSize": {"w":300,"h":300}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sprite_sheet.png",
+	"format": "RGBA8888",
+	"size": {"w":973,"h":814},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:21281f86fc8dea339460b3babae7600d:e0295e80c17a17881a5fa7fbcd246ef1:bf05a2dee40a9b49fc6032b8ef4ac028$"
+}
+}

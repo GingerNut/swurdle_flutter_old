@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spritewidget/spritewidget.dart';
@@ -6,9 +9,8 @@ import 'package:swurdlelogic/swurdlelogic.dart';
 import 'dart:ui' as ui;
 
 
-ui.Image sprites;
-ui.Image swurl;
-ui.Image baize;
+SpriteSheet sprites;
+SpriteTexture texture;
 
 AssetBundle _initBundle() {
   if (rootBundle != null)
@@ -24,9 +26,18 @@ main() async {
 
   ImageMap images = new ImageMap(_bundle);
 
-  sprites = await images.loadImage('assets/sprites.png');
-  //baize = await images.loadImage('assets/baize.png');
-  //swurl = await images.loadImage('assets/swurl.png');
+  ui.Image sprite_sheet = await images.loadImage('assets/sprite_sheet.png');
+
+  String data = await _bundle.loadString("assets/sprite_template.json");
+
+  JsonDecoder decoder = new JsonDecoder();
+
+  final jsonResult = decoder.convert(data);
+
+
+  sprites = new SpriteSheet(sprite_sheet, jsonResult);
+
+  //texture = sprites['hexagon_beige.png'];
 
   game = new Game();
 
