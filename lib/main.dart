@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:spritewidget/spritewidget.dart';
 import 'package:swurdle_flutter/game_screen.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
+import 'dart:ui' as ui;
 
 
-const baize = 0xFF2e8b57;
+ui.Image sprites;
+ui.Image swurl;
+ui.Image baize;
 
+AssetBundle _initBundle() {
+  if (rootBundle != null)
+    return rootBundle;
+  return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
+}
 
-main()  {
+final AssetBundle _bundle = _initBundle();
+
+main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  ImageMap images = new ImageMap(_bundle);
+
+  sprites = await images.loadImage('assets/sprites.png');
+  //baize = await images.loadImage('assets/baize.png');
+  //swurl = await images.loadImage('assets/swurl.png');
 
   game = new Game();
 
@@ -39,25 +59,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-int getColorHexFromStr(String colorStr)
-{
-  colorStr = "FF" + colorStr;
-  colorStr = colorStr.replaceAll("#", "");
-  int val = 0;
-  int len = colorStr.length;
-  for (int i = 0; i < len; i++) {
-    int hexDigit = colorStr.codeUnitAt(i);
-    if (hexDigit >= 48 && hexDigit <= 57) {
-      val += (hexDigit - 48) * (1 << (4 * (len - 1 - i)));
-    } else if (hexDigit >= 65 && hexDigit <= 70) {
-      // A..F
-      val += (hexDigit - 55) * (1 << (4 * (len - 1 - i)));
-    } else if (hexDigit >= 97 && hexDigit <= 102) {
-      // a..f
-      val += (hexDigit - 87) * (1 << (4 * (len - 1 - i)));
-    } else {
-      throw new FormatException("An error occurred when converting a color");
-    }
-  }
-  return val;
-}

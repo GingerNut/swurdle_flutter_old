@@ -9,6 +9,9 @@ import 'package:spritewidget/spritewidget.dart';
 
 class GameBoard extends StatefulWidget {
 
+  static const VERTICAL_SIZE = 800.0;
+  static const HORIZONTAL_SIZE = 600.0;
+
   final Position position;
 
   GameBoard(this.position);
@@ -28,14 +31,10 @@ class GameBoardState extends State<GameBoard> {
   void initState() {
     super.initState();
 
+    rootNode = new NodeWithSize(const Size(GameBoard.HORIZONTAL_SIZE, GameBoard.VERTICAL_SIZE));
 
-    rootNode = new NodeWithSize(const Size(1024.0, 1024.0));
-    rootNode.position = Offset(512, 512);
+    position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(position, t)));
 
-    Hexagon hexagon = new Hexagon(position, position.tiles[0]);
-    hexagon.position = const Offset(-300,0);
-
-    rootNode.addChild(hexagon);
   }
 
   @override
