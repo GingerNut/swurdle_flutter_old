@@ -6,7 +6,8 @@
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":700,"h":699},
-	"sourceSize": {"w":700,"h":699}
+	"sourceSize": {"w":700,"h":699},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "hexagon_beige.png",
@@ -14,7 +15,8 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "hexagon_blue.png",
@@ -22,7 +24,8 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "hexagon_brown.png",
@@ -30,7 +33,8 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "hexagon_green.png",
@@ -38,7 +42,8 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "hexagon_grey.png",
@@ -46,7 +51,8 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "hexagon_pink.png",
@@ -54,7 +60,8 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "hexagon_red.png",
@@ -62,7 +69,8 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "hexagon_yellow.png",
@@ -70,7 +78,8 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":0,"w":121,"h":128},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "star_blue.png",
@@ -78,7 +87,8 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":10,"y":0,"w":111,"h":127},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "star_red.png",
@@ -86,7 +96,8 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":10,"y":0,"w":111,"h":127},
-	"sourceSize": {"w":128,"h":128}
+	"sourceSize": {"w":128,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "swurl.png",
@@ -94,7 +105,8 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":26,"y":17,"w":269,"h":283},
-	"sourceSize": {"w":300,"h":300}
+	"sourceSize": {"w":300,"h":300},
+	"pivot": {"x":0.5,"y":0.5}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
@@ -103,6 +115,6 @@
 	"format": "RGBA8888",
 	"size": {"w":973,"h":814},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:21281f86fc8dea339460b3babae7600d:e0295e80c17a17881a5fa7fbcd246ef1:bf05a2dee40a9b49fc6032b8ef4ac028$"
+	"smartupdate": "$TexturePacker:SmartUpdate:3fb1e58c79901a8e91d5742521cc75ec:e0295e80c17a17881a5fa7fbcd246ef1:bf05a2dee40a9b49fc6032b8ef4ac028$"
 }
 }

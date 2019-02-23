@@ -1,16 +1,14 @@
-import 'dart:convert';
-import 'dart:convert';
-
+import 'package:flutter/painting.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:spritewidget/spritewidget.dart';
 import 'package:swurdle_flutter/game_screen.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
-import 'dart:ui' as ui;
 
-
+ImageMap _imageMap;
 SpriteSheet sprites;
-SpriteTexture texture;
 
 AssetBundle _initBundle() {
   if (rootBundle != null)
@@ -24,22 +22,28 @@ main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  ImageMap images = new ImageMap(_bundle);
+  _imageMap = new ImageMap(_bundle);
 
-  ui.Image sprite_sheet = await images.loadImage('assets/sprite_sheet.png');
+  await _imageMap.load(<String>[
+    'assets/sprite_sheet.png',
+  ]);
 
-  String data = await _bundle.loadString("assets/sprite_template.json");
+  print('LOADED IMAGES');
 
-  JsonDecoder decoder = new JsonDecoder();
+  String json = await _bundle.loadString('assets/sprite_template.json');
 
-  final jsonResult = decoder.convert(data);
+  print('LOADED JSON');
 
+  sprites = new SpriteSheet(_imageMap['assets/sprite_sheet.png'], json);
 
-  sprites = new SpriteSheet(sprite_sheet, jsonResult);
-
-  //texture = sprites['hexagon_beige.png'];
+  print('LOADED SPRITESHEET');
 
   game = new Game();
+
+  print('GAME LOADED');
+
+  SpriteTexture test = sprites['hexagon_beige.png'];
+
 
   runApp(MyApp(game));
 }
