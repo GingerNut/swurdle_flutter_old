@@ -30,7 +30,7 @@ class _MyHomePageState extends State<GameScreen> {
         title: new Text('Swurdle'),
       ),
       body:
-      new GameBoard(game.position),
+      new GameBoard(game.position, true),
 
     );
   }

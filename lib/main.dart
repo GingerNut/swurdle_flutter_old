@@ -9,6 +9,7 @@ import 'package:swurdlelogic/swurdlelogic.dart';
 
 ImageMap _imageMap;
 SpriteSheet sprites;
+SpriteSheet blackFont;
 
 AssetBundle _initBundle() {
   if (rootBundle != null)
@@ -26,15 +27,18 @@ main() async {
 
   await _imageMap.load(<String>[
     'assets/sprite_sheet.png',
+    'assets/black_fonts.png',
   ]);
 
   print('LOADED IMAGES');
 
-  String json = await _bundle.loadString('assets/sprite_template.json');
+  String spriteString = await _bundle.loadString('assets/sprite_template.json');
+  String blackFontString = await _bundle.loadString('assets/black_fonts.json');
 
   print('LOADED JSON');
 
-  sprites = new SpriteSheet(_imageMap['assets/sprite_sheet.png'], json);
+  sprites = new SpriteSheet(_imageMap['assets/sprite_sheet.png'], spriteString);
+  blackFont = new SpriteSheet(_imageMap['assets/black_fonts.png'], blackFontString);
 
   print('LOADED SPRITESHEET');
 
@@ -42,7 +46,7 @@ main() async {
 
   print('GAME LOADED');
 
-  SpriteTexture test = sprites['hexagon_beige.png'];
+
 
 
   runApp(MyApp(game));

@@ -13,19 +13,21 @@ class GameBoard extends StatefulWidget {
   static const HORIZONTAL_SIZE = 600.0;
 
   final Position position;
+  final bool portrait;
 
-  GameBoard(this.position);
+  GameBoard(this.position, this.portrait);
 
   @override
-  GameBoardState createState() => new GameBoardState(position);
+  GameBoardState createState() => new GameBoardState(position, portrait);
 }
 
 class GameBoardState extends State<GameBoard> {
   NodeWithSize rootNode;
 
-  Position position;
+  final bool portrait;
+  final Position position;
 
-  GameBoardState(this.position);
+  GameBoardState(this.position, this.portrait);
 
   @override
   void initState() {
@@ -33,7 +35,7 @@ class GameBoardState extends State<GameBoard> {
 
     rootNode = new NodeWithSize(const Size(GameBoard.HORIZONTAL_SIZE, GameBoard.VERTICAL_SIZE));
 
-    position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(position, t)));
+    position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(position, t, portrait)));
 
   }
 
