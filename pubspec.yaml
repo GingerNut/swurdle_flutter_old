@@ -49,8 +49,7 @@ flutter:
     - assets/sprite_template.json
     - assets/black_fonts.png
     - assets/black_fonts.json
-    - words172000R.txt
-    - words5000R.txt
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

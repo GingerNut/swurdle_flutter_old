@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:swurdle_flutter/game_hexagon.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 import 'package:spritewidget/spritewidget.dart';
+import 'package:swurdle_flutter/main.dart';
 
 class GameBoard extends StatefulWidget {
 
@@ -34,6 +35,8 @@ class GameBoardState extends State<GameBoard> {
     super.initState();
 
     rootNode = new NodeWithSize(const Size(GameBoard.HORIZONTAL_SIZE, GameBoard.VERTICAL_SIZE));
+
+    rootNode.addChild(new Sprite(sprites['baize.png']));
 
     position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(position, t, portrait)));
 
