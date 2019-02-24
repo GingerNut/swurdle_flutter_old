@@ -44,7 +44,9 @@ main() async {
 
   game = new Game();
 
-  await game.initialiseDictionary();
+  String wordlist = await _bundle.loadString('assets/words172000R.txt');
+
+  await game.initialiseDictionary(wordlist);
 
   game.newGame();
 
