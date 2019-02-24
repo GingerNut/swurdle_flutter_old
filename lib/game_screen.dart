@@ -29,8 +29,7 @@ class _MyHomePageState extends State<GameScreen> {
       appBar: new AppBar(
         title: new Text('Swurdle'),
       ),
-      body:
-      new GameBoard(game.position, true),
+      body: new GameBoard(game.position, true),
 
     );
   }

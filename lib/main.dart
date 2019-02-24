@@ -74,6 +74,7 @@ class MyApp extends StatelessWidget {
         canvasColor: const Color(0xFFfafafa),
       ),
       home: new GameScreen(game),
+
     );
   }
 }
