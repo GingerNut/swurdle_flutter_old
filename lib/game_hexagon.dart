@@ -3,12 +3,13 @@
 
 import 'dart:math';
 import 'dart:ui';
+import 'package:flutter/gestures.dart';
 import 'package:spritewidget/spritewidget.dart';
 import 'package:swurdle_flutter/game_board.dart';
 import 'package:swurdle_flutter/main.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
-class Hexagon extends Node {
+class Hexagon extends NodeWithSize {
 
   final Position pos;
   final Tile tile;
@@ -34,7 +35,11 @@ class Hexagon extends Node {
     position = Offset(_x, _y);
   }
 
-  Hexagon(this.pos, this.tile, this.portrait){
+  Hexagon(this.pos, this.tile, this.portrait, Size size) : super(size){
+    userInteractionEnabled = true;
+
+    // TODO touch is offset to the bottom left of the button
+
     setVariables();
 
     addChild(new Sprite(sprites['hexagon_beige.png']));
@@ -54,7 +59,17 @@ class Hexagon extends Node {
     y = homeY;
   }
 
+  @override handleEvent(SpriteBoxEvent event) {
+    if (event.type == PointerDownEvent){
+      print('finger down ${pos.letters[tile.k]}');
+    }
 
+    else if (event.type == PointerMoveEvent){
+      print('finger up ${pos.letters[tile.k]}');
+    }
+
+    return true;
+  }
 
   setVariables(){
     const padding = 1.0;
@@ -109,16 +124,9 @@ class Hexagon extends Node {
       case 'X': return sheet['x.png'];
       case 'Y': return sheet['y.png'];
       case 'Z': return sheet['z.png'];
-
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    return null;
   }
   
   

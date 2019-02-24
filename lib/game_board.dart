@@ -41,7 +41,7 @@ class GameBoardState extends State<GameBoard> {
 
     rootNode.addChild(backGround );
 
-    position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(position, t, portrait)));
+    position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(position, t, portrait, new Size(80 ,80))));
 
   }
 
