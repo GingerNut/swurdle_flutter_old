@@ -24,6 +24,8 @@ dependencies:
 
   spritewidget:
 
+  resource:
+
   swurdlelogic:
     path: C:\Users\Stephen\growing_games\swurdlelogic
 
@@ -49,6 +51,8 @@ flutter:
     - assets/sprite_template.json
     - assets/black_fonts.png
     - assets/black_fonts.json
+    - words5000R.txt
+    - words172000R.txt
 
 
   # To add assets to your application, add an assets section, like this:

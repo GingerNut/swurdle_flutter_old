@@ -44,10 +44,11 @@ main() async {
 
   game = new Game();
 
+  await game.initialiseDictionary();
+
+  game.newGame();
+
   print('GAME LOADED');
-
-
-
 
   runApp(MyApp(game));
 }
