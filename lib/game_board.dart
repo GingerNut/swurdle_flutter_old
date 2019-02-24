@@ -36,7 +36,10 @@ class GameBoardState extends State<GameBoard> {
 
     rootNode = new NodeWithSize(const Size(GameBoard.HORIZONTAL_SIZE, GameBoard.VERTICAL_SIZE));
 
-    rootNode.addChild(new Sprite(sprites['baize.png']));
+    Node backGround = new Sprite(sprites['baize.png'])
+    ..scale = 2.5;
+
+    rootNode.addChild(backGround );
 
     position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(position, t, portrait)));
 

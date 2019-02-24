@@ -48,7 +48,7 @@ class Hexagon extends Node {
 
     if(portrait) rotation = 90;
 
-    scale = 0.8;
+    scale = 0.78;
 
     x = homeX;
     y = homeY;
