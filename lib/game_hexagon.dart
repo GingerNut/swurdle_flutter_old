@@ -16,8 +16,17 @@ class Hexagon extends NodeWithSize {
   final bool portrait;
    double hexSize;
 
+  double minX;
+  double minY;
+  double maxX;
+  double maxY;
+
+  bool fingerDown = false;
+
   static const spacing = 16.0;
   static const root3over2 = 0.8660254037844;
+
+  double defaultScale;
 
   double homeX;
   double homeY;
@@ -35,7 +44,7 @@ class Hexagon extends NodeWithSize {
     position = Offset(_x, _y);
   }
 
-  Hexagon(this.pos, this.tile, this.portrait, Size size) : super(size){
+  Hexagon(this.pos, this.tile, this.portrait) : super(null){
     userInteractionEnabled = true;
 
     // TODO touch is offset to the bottom left of the button
@@ -53,19 +62,63 @@ class Hexagon extends NodeWithSize {
 
     if(portrait) rotation = 90;
 
-    scale = 0.78;
+    scale = defaultScale;
 
     x = homeX;
     y = homeY;
   }
 
+  double lastX;
+  double lastY;
+
+  double deltaX;
+  double deltaY;
+
+  @override
+  bool isPointInside (Offset nodePoint) {
+
+   print (deltaY);
+
+    return (nodePoint.dx >= minX && nodePoint.dx < maxX &&
+        nodePoint.dy >= minY && nodePoint.dy < maxY);
+  }
+
   @override handleEvent(SpriteBoxEvent event) {
     if (event.type == PointerDownEvent){
-      print('finger down ${pos.letters[tile.k]}');
+      fingerDown = true;
+      zPosition = 2;
+      scale = scale * 1.5;
+    }
+
+    else if (event.type == PointerUpEvent){
+      fingerDown = false;
+      zPosition = 0;
+      scale = defaultScale;
+      position = new Offset(homeX, homeY);
     }
 
     else if (event.type == PointerMoveEvent){
-      print('finger up ${pos.letters[tile.k]}');
+
+      if(lastX == null ) lastX = event.boxPosition.dx;
+      else{
+
+        deltaX = event.boxPosition.dx - lastX;
+        lastX = event.boxPosition.dx;
+      }
+
+      if(lastY == null) lastY = event.boxPosition.dy;
+      else {
+
+        deltaY = event.boxPosition.dy - lastY;
+        lastY = event.boxPosition.dy;
+      }
+
+
+
+
+      if(fingerDown) position += new Offset(deltaX, deltaY);
+
+
     }
 
     return true;
@@ -93,6 +146,12 @@ class Hexagon extends NodeWithSize {
     homeY = tile.j * hexagonSpacingVertical + hexagonSpacingVertical ;
     if(tile.i.isEven) homeY += verticalPadding/2;
 
+    minX = -hexSize * 2;
+    minY = -hexSize * 2;
+    maxX = hexSize * 2;
+    maxY = hexSize  * 2;
+
+    defaultScale = 0.78;
   }
   
   SpriteTexture getLetter(SpriteSheet sheet){
