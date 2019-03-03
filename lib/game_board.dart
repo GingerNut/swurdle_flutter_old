@@ -3,10 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_hexagon.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 import 'package:spritewidget/spritewidget.dart';
-import 'package:swurdle_flutter/main.dart';
+
 
 class GameBoard extends StatefulWidget {
 
@@ -15,11 +16,12 @@ class GameBoard extends StatefulWidget {
 
   final Position position;
   final bool portrait;
+  final FlutterInterface ui;
 
-  GameBoard(this.position, this.portrait);
+  GameBoard(this.ui, this.position, this.portrait);
 
   @override
-  GameBoardState createState() => new GameBoardState(position, portrait);
+  GameBoardState createState() => new GameBoardState(ui, position, portrait);
 }
 
 class GameBoardState extends State<GameBoard> {
@@ -27,8 +29,10 @@ class GameBoardState extends State<GameBoard> {
 
   final bool portrait;
   final Position position;
+  final FlutterInterface ui;
 
-  GameBoardState(this.position, this.portrait);
+  GameBoardState(this.ui,this.position, this.portrait){
+  }
 
   @override
   void initState() {
@@ -36,12 +40,12 @@ class GameBoardState extends State<GameBoard> {
 
     rootNode = new NodeWithSize(const Size(GameBoard.HORIZONTAL_SIZE, GameBoard.VERTICAL_SIZE));
 
-    Node backGround = new Sprite(sprites['baize.png'])
+    Node backGround = new Sprite(ui.sprites['baize.png'])
     ..scale = 2.5;
 
     rootNode.addChild(backGround );
 
-    position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(position, t, portrait)));
+    position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(ui, position, t, portrait)));
 
   }
 

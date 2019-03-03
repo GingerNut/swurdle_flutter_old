@@ -5,12 +5,13 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:spritewidget/spritewidget.dart';
+import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_board.dart';
-import 'package:swurdle_flutter/main.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
 class Hexagon extends NodeWithSize {
 
+  final FlutterInterface ui;
   final Position pos;
   final Tile tile;
   final bool portrait;
@@ -44,20 +45,20 @@ class Hexagon extends NodeWithSize {
     position = Offset(_x, _y);
   }
 
-  Hexagon(this.pos, this.tile, this.portrait) : super(null){
+  Hexagon(this.ui, this.pos, this.tile, this.portrait) : super(null){
     userInteractionEnabled = true;
 
     // TODO touch is offset to the bottom left of the button
 
     setVariables();
 
-    addChild(new Sprite(sprites['hexagon_beige.png']));
+    addChild(new Sprite(ui.sprites['hexagon_beige.png']));
 
     Node node = new Node();
 
     addChild(node);
 
-    node.addChild(new Sprite(getLetter(blackFont)));
+    node.addChild(new Sprite(getLetter(ui.blackFont)));
     node.rotation = 270;
 
     if(portrait) rotation = 90;

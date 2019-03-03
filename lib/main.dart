@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:spritewidget/spritewidget.dart';
+import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_screen.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
-ImageMap _imageMap;
-SpriteSheet sprites;
-SpriteSheet blackFont;
 
 AssetBundle _initBundle() {
   if (rootBundle != null)
@@ -23,34 +20,11 @@ main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  _imageMap = new ImageMap(_bundle);
+  game = new Game(new FlutterInterface(_bundle));
 
-  await _imageMap.load(<String>[
-    'assets/sprite_sheet.png',
-    'assets/black_fonts.png',
-  ]);
-
-  print('LOADED IMAGES');
-
-  String spriteString = await _bundle.loadString('assets/sprite_template.json');
-  String blackFontString = await _bundle.loadString('assets/black_fonts.json');
-
-  print('LOADED JSON');
-
-  sprites = new SpriteSheet(_imageMap['assets/sprite_sheet.png'], spriteString);
-  blackFont = new SpriteSheet(_imageMap['assets/black_fonts.png'], blackFontString);
-
-  print('LOADED SPRITESHEET');
-
-  game = new Game();
-
-  String wordlist = await _bundle.loadString('assets/words172000R.txt');
-
-  await game.initialiseDictionary(wordlist);
+  await game.setUp();
 
   game.newGame();
-
-  print('GAME LOADED');
 
   runApp(MyApp(game));
 }
@@ -77,6 +51,7 @@ class MyApp extends StatelessWidget {
         canvasColor: const Color(0xFFfafafa),
       ),
       home: new GameScreen(game),
+
 
     );
   }

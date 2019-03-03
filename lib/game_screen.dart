@@ -30,35 +30,45 @@ class _MyHomePageState extends State<GameScreen> {
         title: Text('Swurdle'),
       ),
 
-      body: new GameBoard(game.position, true),
+      drawer: ListTile(
+        leading: Icon(Icons.change_history),
+        title: Text('Change history'),
+        onTap: () {
+          // change app state...
+          Navigator.pop(context); // close the drawer
+        },
+      ),
+      body: GameBoard(game.ui, game.position, true),
+
+      backgroundColor : const Color(0xFF4caf50),
 
       bottomNavigationBar: new BottomNavigationBar(
-        items:[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.code),
-            title: Text ('swap'),
-          ),
+          items:[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.code),
+              title: Text ('swap'),
+            ),
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.code),
-            title: Text('Swap'),
-          ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.code),
+              title: Text('Swap'),
+            ),
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            title: Text('Title'),
-          ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.star),
+              title: Text('Title'),
+            ),
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.build),
-            title: Text('settings'),
-          ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.build),
+              title: Text('settings'),
+            ),
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.check),
-            title: Text('Go'),
-          )
-        ]
+            BottomNavigationBarItem(
+              icon: Icon(Icons.check),
+              title: Text('Go'),
+            )
+          ]
       ),
 
     );
