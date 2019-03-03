@@ -17,6 +17,10 @@ class Hexagon extends NodeWithSize {
   final bool portrait;
    double hexSize;
 
+   Node hex;
+   Node twist;
+   Sprite letter;
+
   double minX;
   double minY;
   double maxX;
@@ -45,28 +49,43 @@ class Hexagon extends NodeWithSize {
     position = Offset(_x, _y);
   }
 
-  Hexagon(this.ui, this.pos, this.tile, this.portrait) : super(null){
-    userInteractionEnabled = true;
+  draw(){
 
-    // TODO touch is offset to the bottom left of the button
+    addChild(hex);
 
-    setVariables();
+    addChild(twist);
 
-    addChild(new Sprite(ui.sprites['hexagon_beige.png']));
-
-    Node node = new Node();
-
-    addChild(node);
-
-    node.addChild(new Sprite(getLetter(ui.blackFont)));
-    node.rotation = 270;
-
-    if(portrait) rotation = 90;
+    twist.addChild(letter);
 
     scale = defaultScale;
 
     x = homeX;
     y = homeY;
+
+  }
+
+  setBeige(){
+    hex = new Sprite(ui.sprites['hexagon_beige.png']);
+    letter = new Sprite(getLetter(ui.blackFont));
+  }
+
+  setBrown(){
+    hex = new Sprite(ui.sprites['hexagon_brown.png']);
+    //letter = new Sprite(getLetter(ui.whitefont));
+  }
+
+  Hexagon(this.ui, this.pos, this.tile, this.portrait) : super(null){
+    userInteractionEnabled = true;
+
+    setVariables();
+
+    twist = new Node();
+    twist.rotation = 270;
+    if(portrait) rotation = 90;
+
+    setBeige();
+
+   draw();
   }
 
   double lastX;
@@ -157,7 +176,7 @@ class Hexagon extends NodeWithSize {
   
   SpriteTexture getLetter(SpriteSheet sheet){
        
-    switch(pos.letters[tile.k]){
+    switch(ui.letters[tile.k]){
       case 'A': return sheet['a.png'];
       case 'B': return sheet['b.png'];
       case 'C': return sheet['c.png'];
