@@ -91,13 +91,13 @@ class Hexagon extends NodeWithSize {
   double lastX;
   double lastY;
 
-  double deltaX;
-  double deltaY;
+  double deltaX = 0.0;
+  double deltaY = 0.0;
 
   @override
   bool isPointInside (Offset nodePoint) {
 
-   print (deltaY);
+   //print (deltaY);
 
     return (nodePoint.dx >= minX && nodePoint.dx < maxX &&
         nodePoint.dy >= minY && nodePoint.dy < maxY);
@@ -132,9 +132,6 @@ class Hexagon extends NodeWithSize {
         deltaY = event.boxPosition.dy - lastY;
         lastY = event.boxPosition.dy;
       }
-
-
-
 
       if(fingerDown) position += new Offset(deltaX, deltaY);
 

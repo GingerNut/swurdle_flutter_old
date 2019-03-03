@@ -2,6 +2,8 @@
 import 'package:spritewidget/spritewidget.dart';
 
 import 'package:flutter/services.dart';
+import 'package:swurdle_flutter/game_board.dart';
+import 'package:swurdle_flutter/game_screen.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
 
@@ -11,7 +13,20 @@ class FlutterInterface extends Interface{
   SpriteSheet blackFont;
   SpriteSheet whiteFont;
 
+  GameBoard screen;
+
   AssetBundle bundle;
+
+  bool _valid = false;
+
+  invalidate(){
+    _valid = false;
+    redraw();
+  }
+
+  register(GameBoard screen){
+    this.screen = screen;
+  }
 
   FlutterInterface(this.bundle);
 
@@ -35,6 +50,13 @@ class FlutterInterface extends Interface{
   Future<String> loadString(String fileName) async{
     String string = await bundle.loadString('assets/' + fileName);
     return string;
+  }
+
+  redraw() {
+
+    if(screen != null) screen.redraw();
+
+    _valid = true;
   }
 
 

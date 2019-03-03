@@ -18,10 +18,19 @@ class GameBoard extends StatefulWidget {
   final bool portrait;
   final FlutterInterface ui;
 
-  GameBoard(this.ui, this.position, this.portrait);
+  List<Hexagon> hexagons = new List();
+
+  GameBoard(this.ui, this.position, this.portrait){
+    ui.register(this);
+  }
+
+  redraw(){
+      hexagons.forEach((h) => h.draw());
+  }
+
 
   @override
-  GameBoardState createState() => new GameBoardState(ui, position, portrait);
+  GameBoardState createState() => new GameBoardState(ui, position, portrait, hexagons);
 }
 
 class GameBoardState extends State<GameBoard> {
@@ -30,9 +39,9 @@ class GameBoardState extends State<GameBoard> {
   final bool portrait;
   final Position position;
   final FlutterInterface ui;
+  List<Hexagon> hexagons = new List();
 
-  GameBoardState(this.ui,this.position, this.portrait){
-  }
+  GameBoardState(this.ui,this.position, this.portrait, this.hexagons);
 
   @override
   void initState() {
@@ -45,7 +54,9 @@ class GameBoardState extends State<GameBoard> {
 
     rootNode.addChild(backGround );
 
-    position.tiles.forEach((t)=> rootNode.addChild(new Hexagon(ui, position, t, portrait)));
+    position.tiles.forEach((t)=> hexagons. add(new Hexagon(ui, position, t, portrait)));
+
+    hexagons.forEach((h)=> rootNode.addChild(h));
 
   }
 
