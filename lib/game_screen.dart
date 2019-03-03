@@ -14,7 +14,7 @@ class GameScreen extends StatefulWidget {
   GameScreen(this. game, {Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState(game);
+  _MyHomePageState createState() => _MyHomePageState(game);
 }
 
 class _MyHomePageState extends State<GameScreen> {
@@ -25,11 +25,41 @@ class _MyHomePageState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Swurdle'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Swurdle'),
       ),
+
       body: new GameBoard(game.position, true),
+
+      bottomNavigationBar: new BottomNavigationBar(
+        items:[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.code),
+            title: Text ('swap'),
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.code),
+            title: Text('Swap'),
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            title: Text('Title'),
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.build),
+            title: Text('settings'),
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check),
+            title: Text('Go'),
+          )
+        ]
+      ),
 
     );
   }
