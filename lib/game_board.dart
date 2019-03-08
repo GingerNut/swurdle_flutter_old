@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:swurdle_flutter/board.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_hexagon.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
@@ -34,7 +35,7 @@ class GameBoard extends StatefulWidget {
 }
 
 class GameBoardState extends State<GameBoard> {
-  NodeWithSize rootNode;
+  Board board;
 
   bool valid = false;
   final bool portrait;
@@ -61,16 +62,16 @@ class GameBoardState extends State<GameBoard> {
   }
 
   void draw(){
-    rootNode = new NodeWithSize(const Size(GameBoard.HORIZONTAL_SIZE, GameBoard.VERTICAL_SIZE));
+    board = new Board(hexagons, position, ui);
 
     Node backGround = new Sprite(ui.sprites['baize.png'])
       ..scale = 2.5;
 
-    rootNode.addChild(backGround );
+    board.addChild(backGround );
 
     position.tiles.forEach((t)=> hexagons. add(new Hexagon(ui, position, t, portrait)));
 
-    hexagons.forEach((h)=> rootNode.addChild(h));
+    hexagons.forEach((h)=> board.addChild(h));
 
     valid = true;
 
@@ -79,7 +80,7 @@ class GameBoardState extends State<GameBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return new SpriteWidget(rootNode);
+    return new SpriteWidget(board);
   }
 
 }

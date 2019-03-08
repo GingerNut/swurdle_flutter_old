@@ -105,7 +105,6 @@ class Hexagon extends NodeWithSize {
   }
 
   Hexagon(this.ui, this.pos, this.tile, this.portrait) : super(null){
-    userInteractionEnabled = true;
 
     setVariables();
 
@@ -118,6 +117,14 @@ class Hexagon extends NodeWithSize {
 
   double deltaX = 0.0;
   double deltaY = 0.0;
+
+
+  bool isFingerOn(Offset offset){
+
+    return (offset.dx >= homeX - minX && offset.dx < homeX + maxX &&
+        offset.dy >= homeY - minY && offset.dy < homeY + maxY);
+  }
+
 
   @override
   bool isPointInside (Offset nodePoint) {
