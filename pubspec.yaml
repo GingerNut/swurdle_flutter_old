@@ -50,7 +50,8 @@ flutter:
     - assets/sprite_sheet.png
     - assets/sprite_template.json
     - assets/black_fonts.png
-    - assets/black_fonts.json
+    - assets/white_fonts.png
+    - assets/fonts.json
     - words5000R.txt
     - words172000R.txt
 

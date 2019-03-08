@@ -18,16 +18,16 @@ class GameBoard extends StatefulWidget {
   final bool portrait;
   final FlutterInterface ui;
 
+
   List<Hexagon> hexagons = new List();
 
   GameBoard(this.ui, this.position, this.portrait){
-    ui.register(this);
+
   }
 
-  redraw(){
-      hexagons.forEach((h) => h.draw());
-  }
+  void invalidate(){
 
+  }
 
   @override
   GameBoardState createState() => new GameBoardState(ui, position, portrait, hexagons);
@@ -36,21 +36,35 @@ class GameBoard extends StatefulWidget {
 class GameBoardState extends State<GameBoard> {
   NodeWithSize rootNode;
 
+  bool valid = false;
   final bool portrait;
   final Position position;
   final FlutterInterface ui;
   List<Hexagon> hexagons = new List();
 
-  GameBoardState(this.ui,this.position, this.portrait, this.hexagons);
+  GameBoardState(this.ui,this.position, this.portrait, this.hexagons){
+    ui.register(this);
+  }
 
   @override
   void initState() {
     super.initState();
 
+   draw();
+  }
+
+  @override
+  void setState(VoidCallback fn){
+    super.setState(fn);
+
+    draw();
+  }
+
+  void draw(){
     rootNode = new NodeWithSize(const Size(GameBoard.HORIZONTAL_SIZE, GameBoard.VERTICAL_SIZE));
 
     Node backGround = new Sprite(ui.sprites['baize.png'])
-    ..scale = 2.5;
+      ..scale = 2.5;
 
     rootNode.addChild(backGround );
 
@@ -58,7 +72,10 @@ class GameBoardState extends State<GameBoard> {
 
     hexagons.forEach((h)=> rootNode.addChild(h));
 
+    valid = true;
+
   }
+
 
   @override
   Widget build(BuildContext context) {

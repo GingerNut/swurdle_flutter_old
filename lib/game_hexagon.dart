@@ -51,6 +51,12 @@ class Hexagon extends NodeWithSize {
 
   draw(){
 
+    twist = new Node();
+    twist.rotation = 270;
+    if(portrait) rotation = 90;
+
+    children.clear();
+
     addChild(hex);
 
     addChild(twist);
@@ -61,17 +67,41 @@ class Hexagon extends NodeWithSize {
 
     x = homeX;
     y = homeY;
-
   }
 
   setBeige(){
     hex = new Sprite(ui.sprites['hexagon_beige.png']);
     letter = new Sprite(getLetter(ui.blackFont));
+
+    draw();
   }
 
   setBrown(){
     hex = new Sprite(ui.sprites['hexagon_brown.png']);
-    //letter = new Sprite(getLetter(ui.whitefont));
+    letter = new Sprite(getLetter(ui.whiteFont));
+
+    draw();
+  }
+
+  setRed(){
+    hex = new Sprite(ui.sprites['hexagon_red.png']);
+    letter = new Sprite(getLetter(ui.whiteFont));
+
+    draw();
+  }
+
+  setBlue(){
+    hex = new Sprite(ui.sprites['hexagon_blue.png']);
+    letter = new Sprite(getLetter(ui.whiteFont));
+
+    draw();
+  }
+
+  setGrey(){
+    hex = new Sprite(ui.sprites['hexagon_grey.png']);
+    letter = new Sprite(getLetter(ui.whiteFont));
+
+    draw();
   }
 
   Hexagon(this.ui, this.pos, this.tile, this.portrait) : super(null){
@@ -79,13 +109,8 @@ class Hexagon extends NodeWithSize {
 
     setVariables();
 
-    twist = new Node();
-    twist.rotation = 270;
-    if(portrait) rotation = 90;
-
     setBeige();
 
-   draw();
   }
 
   double lastX;
@@ -97,8 +122,6 @@ class Hexagon extends NodeWithSize {
   @override
   bool isPointInside (Offset nodePoint) {
 
-   //print (deltaY);
-
     return (nodePoint.dx >= minX && nodePoint.dx < maxX &&
         nodePoint.dy >= minY && nodePoint.dy < maxY);
   }
@@ -106,12 +129,18 @@ class Hexagon extends NodeWithSize {
   @override handleEvent(SpriteBoxEvent event) {
     if (event.type == PointerDownEvent){
       fingerDown = true;
+      ui.dragFrom = tile;
+      print('tapped ${pos.letters[ui.dragFrom.k]}');
       zPosition = 2;
       scale = scale * 1.5;
     }
 
     else if (event.type == PointerUpEvent){
       fingerDown = false;
+      print('finger up ${pos.letters[ui.dragFrom.k]}');
+
+      ui.select(tile);
+
       zPosition = 0;
       scale = defaultScale;
       position = new Offset(homeX, homeY);

@@ -2,9 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_board.dart';
-import 'package:swurdle_flutter/game_hexagon.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
 
@@ -49,10 +47,12 @@ class _MyHomePageState extends State<GameScreen> {
       backgroundColor : const Color(0xFF4caf50),
 
       bottomNavigationBar: new BottomNavigationBar(
+        onTap: onTabTapped,
           items:[
             BottomNavigationBarItem(
               icon: Icon(Icons.code),
               title: Text ('swap'),
+
             ),
 
             BottomNavigationBarItem(
@@ -83,5 +83,16 @@ class _MyHomePageState extends State<GameScreen> {
 
 
 
+
+  void onTabTapped(int index) {
+  switch(index){
+    case 0:
+      game.ui.buttonSwap();
+      game.ui.redraw();
+
+
+
+  }
+  }
 }
 
