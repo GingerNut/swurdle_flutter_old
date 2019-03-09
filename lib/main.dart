@@ -8,6 +8,7 @@ import 'package:swurdle_flutter/game_screen.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
 
+
 AssetBundle _initBundle() {
   if (rootBundle != null)
     return rootBundle;

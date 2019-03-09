@@ -49,6 +49,8 @@ class GameBoardState extends State<GameBoard> {
   void initState() {
     super.initState();
 
+    board = new Board(hexagons, position, ui);
+
    draw();
   }
 
@@ -60,16 +62,19 @@ class GameBoardState extends State<GameBoard> {
   }
 
   void draw(){
-    board = new Board(hexagons, position, ui);
+
+    board.children.clear();
 
     Node backGround = new Sprite(ui.sprites['baize.png'])
       ..scale = 2.5;
 
     board.addChild(backGround );
 
+    hexagons.clear();
+
     position.tiles.forEach((t)=> hexagons. add(new Hexagon(ui, position, t, portrait)));
 
-    hexagons.forEach((h)=> board.addChild(h));
+    hexagons.forEach((h)=> board.addChild(h) );
 
     valid = true;
 

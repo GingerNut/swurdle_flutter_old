@@ -6,6 +6,8 @@ import 'package:swurdle_flutter/game_board.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
 
+
+
 class FlutterInterface extends Interface{
   ImageMap imageMap;
   SpriteSheet sprites;
@@ -15,8 +17,6 @@ class FlutterInterface extends Interface{
   GameBoardState state;
 
   AssetBundle bundle;
-
-  bool _valid = false;
 
   register(GameBoardState state){
     this.state = state;
@@ -48,17 +48,13 @@ class FlutterInterface extends Interface{
   }
 
 
-
-
   Tile dragFrom;
   Tile dragTo;
 
 
   redraw(){
 
-    print('redrawing');
-
-    if(state != null) state.valid = false;
+    if(state != null) state.setState(() => state.valid = false);
 
   }
 
