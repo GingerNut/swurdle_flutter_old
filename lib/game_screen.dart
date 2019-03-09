@@ -89,9 +89,12 @@ class _MyHomePageState extends State<GameScreen> {
     case 0:
       game.ui.buttonSwap();
       game.ui.redraw();
+      break;
 
-
-
+    case 2:
+      game.ui.reset();
+      game.ui.redraw();
+      break;
   }
   }
 }

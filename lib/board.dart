@@ -46,6 +46,17 @@ class Board extends NodeWithSize{
 
     else if (event.type == PointerUpEvent){
 
+      hexagons.forEach((h) {
+
+        if(ui.selected.contains(h.tile)) h.setBrown();
+
+        else h.setBeige();
+
+      } );
+
+
+
+
     }
 
     else if (event.type == PointerMoveEvent){

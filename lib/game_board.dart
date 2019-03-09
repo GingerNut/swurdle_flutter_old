@@ -35,7 +35,7 @@ class GameBoard extends StatefulWidget {
 class GameBoardState extends State<GameBoard> {
   Board board;
 
-  bool valid = false;
+  bool valid = true;
   final bool portrait;
   final Position position;
   final FlutterInterface ui;
@@ -51,6 +51,15 @@ class GameBoardState extends State<GameBoard> {
 
     board = new Board(hexagons, position, ui);
 
+    Node backGround = new Sprite(ui.sprites['baize.png'])
+      ..scale = 2.5;
+
+    board.addChild(backGround );
+
+    position.tiles.forEach((t)=> hexagons. add(new Hexagon(ui, position, t, portrait)));
+
+    hexagons.forEach((h)=> board.addChild(h) );
+
    draw();
   }
 
@@ -63,20 +72,11 @@ class GameBoardState extends State<GameBoard> {
 
   void draw(){
 
-    board.children.clear();
-
-    Node backGround = new Sprite(ui.sprites['baize.png'])
-      ..scale = 2.5;
-
-    board.addChild(backGround );
-
-    hexagons.clear();
-
-    position.tiles.forEach((t)=> hexagons. add(new Hexagon(ui, position, t, portrait)));
-
-    hexagons.forEach((h)=> board.addChild(h) );
+    hexagons.forEach((h) => h.redraw());
 
     valid = true;
+
+    print(ui.game.position.words.length);
 
   }
 

@@ -75,9 +75,14 @@ class Hexagon extends NodeWithSize {
     
   }
 
+  redraw(){
+    setBeige();
+  }
+
+
   setBeige(){
-    hex = new Sprite(ui.sprites['hexagon_beige.png']);
     letter = new Sprite(getLetter(ui.blackFont));
+    hex = new Sprite(ui.sprites['hexagon_beige.png']);
 
     draw();
   }
@@ -196,6 +201,8 @@ class Hexagon extends NodeWithSize {
 
     return null;
   }
+
+
   
   
 }
