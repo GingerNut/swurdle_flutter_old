@@ -26,7 +26,6 @@ class Board extends NodeWithSize{
   bool isPointInside (Offset nodePoint) {
 
    pointer = nodePoint;
-   print(pointer);
 
    return true;
   }
@@ -34,7 +33,15 @@ class Board extends NodeWithSize{
 
   @override handleEvent(SpriteBoxEvent event) {
     if (event.type == PointerDownEvent){
-        getHex(pointer)?.setBrown();
+      Hexagon h = getHex(pointer);
+
+      if(h != null){
+
+        h.setBrown();
+
+        ui.select(h.tile);
+      }
+
     }
 
     else if (event.type == PointerUpEvent){
@@ -43,9 +50,6 @@ class Board extends NodeWithSize{
 
     else if (event.type == PointerMoveEvent){
 
-      Hexagon h = getHex(pointer);
-
-          if(getHex(pointer) != null) print('finger on ${pos.letters[h.tile.k]}');
     }
 
     return true;
@@ -55,10 +59,8 @@ class Board extends NodeWithSize{
     Hexagon hex;
 
     hexagons.forEach((h) {
-      if(h.isFingerOn(offset)) hex = h;
+      if(h.isPointInside(offset)) hex = h;
     });
-
-    if(hex != null) print('found hex with letter ${pos.letters[hex.tile.k]}');
 
     return hex;
   }

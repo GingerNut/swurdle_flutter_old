@@ -67,6 +67,12 @@ class Hexagon extends NodeWithSize {
 
     x = homeX;
     y = homeY;
+    
+    minX = homeX - hexSize;
+    maxX = homeX + hexSize;
+    minY = homeY - hexSize;
+    maxY = homeY + hexSize;
+    
   }
 
   setBeige(){
@@ -119,63 +125,13 @@ class Hexagon extends NodeWithSize {
   double deltaY = 0.0;
 
 
-  bool isFingerOn(Offset offset){
+ @override
+  bool isPointInside (Offset offset) {
 
-    return (offset.dx >= homeX - minX && offset.dx < homeX + maxX &&
-        offset.dy >= homeY - minY && offset.dy < homeY + maxY);
+    return (offset.dx >= minX && offset.dx < maxX &&
+        offset.dy >= minY && offset.dy < maxY);
   }
 
-
-  @override
-  bool isPointInside (Offset nodePoint) {
-
-    return (nodePoint.dx >= minX && nodePoint.dx < maxX &&
-        nodePoint.dy >= minY && nodePoint.dy < maxY);
-  }
-
-  @override handleEvent(SpriteBoxEvent event) {
-    if (event.type == PointerDownEvent){
-      fingerDown = true;
-      ui.dragFrom = tile;
-      print('tapped ${pos.letters[ui.dragFrom.k]}');
-      zPosition = 2;
-      scale = scale * 1.5;
-    }
-
-    else if (event.type == PointerUpEvent){
-      fingerDown = false;
-      print('finger up ${pos.letters[ui.dragFrom.k]}');
-
-      ui.select(tile);
-
-      zPosition = 0;
-      scale = defaultScale;
-      position = new Offset(homeX, homeY);
-    }
-
-    else if (event.type == PointerMoveEvent){
-
-      if(lastX == null ) lastX = event.boxPosition.dx;
-      else{
-
-        deltaX = event.boxPosition.dx - lastX;
-        lastX = event.boxPosition.dx;
-      }
-
-      if(lastY == null) lastY = event.boxPosition.dy;
-      else {
-
-        deltaY = event.boxPosition.dy - lastY;
-        lastY = event.boxPosition.dy;
-      }
-
-      if(fingerDown) position += new Offset(deltaX, deltaY);
-
-
-    }
-
-    return true;
-  }
 
   setVariables(){
     const padding = 1.0;

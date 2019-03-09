@@ -22,9 +22,7 @@ class GameBoard extends StatefulWidget {
 
   List<Hexagon> hexagons = new List();
 
-  GameBoard(this.ui, this.position, this.portrait){
-
-  }
+  GameBoard(this.ui, this.position, this.portrait);
 
   void invalidate(){
 

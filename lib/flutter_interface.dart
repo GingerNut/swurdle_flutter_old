@@ -56,6 +56,8 @@ class FlutterInterface extends Interface{
 
   redraw(){
 
+    print('redrawing');
+
     if(state != null) state.valid = false;
 
   }
