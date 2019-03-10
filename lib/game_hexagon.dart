@@ -7,15 +7,18 @@ import 'package:flutter/gestures.dart';
 import 'package:spritewidget/spritewidget.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_board.dart';
+import 'package:swurdlelogic/swurdlelogic.dart' as SL;
 import 'package:swurdlelogic/swurdlelogic.dart';
 
 class Hexagon extends NodeWithSize {
 
   final FlutterInterface ui;
-  final Position pos;
-  final Tile tile;
+  final SL.Position pos;
+  final SL.Tile tile;
   final bool portrait;
    double hexSize;
+
+   int color = SL.Board.COLOR_NONE;
 
    Node hex;
    Node twist;
@@ -39,6 +42,22 @@ class Hexagon extends NodeWithSize {
   double _x;
   double _y;
 
+
+  Hexagon(this.ui, this.pos, this.tile, this.portrait) : super(null){
+
+    setVariables();
+
+    setColor();
+
+    minX = homeX -hexSize * 2;
+    minY = homeY -hexSize * 2;
+    maxX = homeX + hexSize * 2;
+    maxY = homeY + hexSize  * 2;
+
+
+  }
+
+
   set x(double posX){
     _x = posX;
     position = Offset(_x, _y);
@@ -57,6 +76,8 @@ class Hexagon extends NodeWithSize {
 
     children.clear();
 
+    setColor();
+
     addChild(hex);
 
     addChild(twist);
@@ -64,64 +85,8 @@ class Hexagon extends NodeWithSize {
     twist.addChild(letter);
 
     scale = defaultScale;
-
-    x = homeX;
-    y = homeY;
-    
-    minX = homeX - hexSize;
-    maxX = homeX + hexSize;
-    minY = homeY - hexSize;
-    maxY = homeY + hexSize;
-    
   }
 
-  redraw(){
-    setBeige();
-  }
-
-
-  setBeige(){
-    letter = new Sprite(getLetter(ui.blackFont));
-    hex = new Sprite(ui.sprites['hexagon_beige.png']);
-
-    draw();
-  }
-
-  setBrown(){
-    hex = new Sprite(ui.sprites['hexagon_brown.png']);
-    letter = new Sprite(getLetter(ui.whiteFont));
-
-    draw();
-  }
-
-  setRed(){
-    hex = new Sprite(ui.sprites['hexagon_red.png']);
-    letter = new Sprite(getLetter(ui.whiteFont));
-
-    draw();
-  }
-
-  setBlue(){
-    hex = new Sprite(ui.sprites['hexagon_blue.png']);
-    letter = new Sprite(getLetter(ui.whiteFont));
-
-    draw();
-  }
-
-  setGrey(){
-    hex = new Sprite(ui.sprites['hexagon_grey.png']);
-    letter = new Sprite(getLetter(ui.whiteFont));
-
-    draw();
-  }
-
-  Hexagon(this.ui, this.pos, this.tile, this.portrait) : super(null){
-
-    setVariables();
-
-    setBeige();
-
-  }
 
   double lastX;
   double lastY;
@@ -144,15 +109,15 @@ class Hexagon extends NodeWithSize {
 
 
 
-    hexSize = min(GameBoard.HORIZONTAL_SIZE / size * root3over2 /1.63, GameBoard.VERTICAL_SIZE/ size * root3over2 / 1.45);
+    hexSize = min(GameBoard.HORIZONTAL_SIZE / SL.size * root3over2 /1.63, GameBoard.VERTICAL_SIZE/ SL.size * root3over2 / 1.45);
 
     hexSize /= 1.8;
 
     double hexagonSpacingVertical = hexSize * (2 + padding * 2) * root3over2;
     double hexagonSpacingHorizontal = hexSize * (2 + padding * 2) * horizontal_packing;
 
-    double horizontalPadding = (GameBoard.HORIZONTAL_SIZE - hexagonSpacingHorizontal * size)/2;
-    double verticalPadding = (GameBoard.VERTICAL_SIZE - hexagonSpacingVertical * size)/2 ;
+    double horizontalPadding = (GameBoard.HORIZONTAL_SIZE - hexagonSpacingHorizontal * SL.size)/2;
+    double verticalPadding = (GameBoard.VERTICAL_SIZE - hexagonSpacingVertical * SL.size)/2 ;
 
 
 
@@ -160,10 +125,6 @@ class Hexagon extends NodeWithSize {
     homeY = tile.j * hexagonSpacingVertical + hexagonSpacingVertical ;
     if(tile.i.isEven) homeY += verticalPadding/2;
 
-    minX = -hexSize * 2;
-    minY = -hexSize * 2;
-    maxX = hexSize * 2;
-    maxY = hexSize  * 2;
 
     defaultScale = 0.78;
   }
@@ -202,7 +163,76 @@ class Hexagon extends NodeWithSize {
     return null;
   }
 
+  redraw(){
 
+   draw();
+  }
+
+
+  setColor(){
+
+   if(tile.selected){
+
+     if(color == Board.COLOR_SELECTED) {
+
+    // do nothing
+
+     } else {
+
+       hex = new Sprite(ui.sprites['hexagon_brown.png']);
+       letter = new Sprite(getLetter(ui.whiteFont));
+
+       color = SL.Board.COLOR_SELECTED;
+
+     }
+
+   } else {
+
+     switch(tile.color){
+
+       case Board.COLOR_NONE:
+         hex = new Sprite(ui.sprites['hexagon_beige.png']);
+         letter = new Sprite(getLetter(ui.blackFont));
+         color = Board.COLOR_NONE;
+         break;
+
+       case Board.COLOR_RED:
+         hex = new Sprite(ui.sprites['hexagon_red.png']);
+         letter = new Sprite(getLetter(ui.whiteFont));
+         color = Board.COLOR_RED;
+         break;
+
+       case Board.COLOR_BLUE:
+         hex = new Sprite(ui.sprites['hexagon_blue.png']);
+         letter = new Sprite(getLetter(ui.whiteFont));
+         color = Board.COLOR_BLUE;
+         break;
+
+       case Board.COLOR_PURPLE:
+         hex = new Sprite(ui.sprites['hexagon_purple.png']);
+         letter = new Sprite(getLetter(ui.whiteFont));
+         color = Board.COLOR_PURPLE;
+         break;
+
+       case Board.COLOR_GOLD:
+         hex = new Sprite(ui.sprites['hexagon_gold.png']);
+         letter = new Sprite(getLetter(ui.whiteFont));
+         color = Board.COLOR_GOLD;
+         break;
+
+       case Board.COLOR_GREY:
+         hex = new Sprite(ui.sprites['hexagon_gre.png']);
+         letter = new Sprite(getLetter(ui.blackFont));
+         color = Board.COLOR_GREY;
+         break;
+
+     }
+
+
+   }
+
+
+ }
   
   
 }

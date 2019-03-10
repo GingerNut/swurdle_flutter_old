@@ -37,24 +37,12 @@ class Board extends NodeWithSize{
 
       if(h != null){
 
-        h.setBrown();
-
         ui.select(h.tile);
       }
 
     }
 
     else if (event.type == PointerUpEvent){
-
-      hexagons.forEach((h) {
-
-        if(ui.selected.contains(h.tile)) h.setBrown();
-
-        else h.setBeige();
-
-      } );
-
-
 
 
     }

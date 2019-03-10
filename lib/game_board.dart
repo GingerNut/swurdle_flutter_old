@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:swurdle_flutter/board.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_hexagon.dart';
-import 'package:swurdlelogic/swurdlelogic.dart';
+import 'package:swurdlelogic/swurdlelogic.dart' as SL;
 import 'package:spritewidget/spritewidget.dart';
 
 
@@ -15,12 +15,12 @@ class GameBoard extends StatefulWidget {
   static const VERTICAL_SIZE = 800.0;
   static const HORIZONTAL_SIZE = 600.0;
 
-  final Position position;
+  final SL.Position position;
   final bool portrait;
   final FlutterInterface ui;
 
 
-  List<Hexagon> hexagons = new List();
+  final List<Hexagon> hexagons = new List();
 
   GameBoard(this.ui, this.position, this.portrait);
 
@@ -37,9 +37,9 @@ class GameBoardState extends State<GameBoard> {
 
   bool valid = true;
   final bool portrait;
-  final Position position;
+  final SL.Position position;
   final FlutterInterface ui;
-  List<Hexagon> hexagons = new List();
+  List<Hexagon> hexagons;
 
   GameBoardState(this.ui,this.position, this.portrait, this.hexagons){
     ui.register(this);
