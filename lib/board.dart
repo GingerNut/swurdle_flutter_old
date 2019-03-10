@@ -38,6 +38,7 @@ class Board extends NodeWithSize{
       if(h != null){
 
         ui.select(h.tile);
+        refreshTiles();
       }
 
     }
@@ -63,6 +64,13 @@ class Board extends NodeWithSize{
 
     return hex;
   }
+
+  refreshTiles(){
+    hexagons.forEach((h) {
+      h.refresh();
+    });
+  }
+
 
 
 }

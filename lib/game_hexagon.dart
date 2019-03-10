@@ -18,11 +18,12 @@ class Hexagon extends NodeWithSize {
   final bool portrait;
    double hexSize;
 
-   int color = SL.Board.COLOR_NONE;
+   int color;
+   String letter;
 
-   Node hex;
-   Node twist;
-   Sprite letter;
+   Node hexNode;
+   Node twistNode;
+   Sprite letterSprite;
 
   double minX;
   double minY;
@@ -47,13 +48,12 @@ class Hexagon extends NodeWithSize {
 
     setVariables();
 
-    setColor();
-
     minX = homeX -hexSize * 2;
     minY = homeY -hexSize * 2;
     maxX = homeX + hexSize * 2;
     maxY = homeY + hexSize  * 2;
 
+    position = Offset(homeX, homeY);
 
   }
 
@@ -68,25 +68,109 @@ class Hexagon extends NodeWithSize {
     position = Offset(_x, _y);
   }
 
-  draw(){
+  initialise(){
 
-    twist = new Node();
-    twist.rotation = 270;
+    hexNode = new Sprite(ui.sprites['hexagon_beige.png']);
+    color = tile.color;
+    addChild(hexNode);
+
+    twistNode = new Node();
+    twistNode.rotation = 270;
     if(portrait) rotation = 90;
+    addChild(twistNode);
 
-    children.clear();
 
-    setColor();
-
-    addChild(hex);
-
-    addChild(twist);
-
-    twist.addChild(letter);
+    letterSprite = new Sprite(getLetter(ui.blackFont));
+    letter = ui.letters[tile.k];
+    twistNode.addChild(letterSprite);
 
     scale = defaultScale;
+
   }
 
+  refresh(){
+
+    bool letterChange = false;
+
+    if(color != tile.color){
+
+      letterChange = true;
+      removeChild(hexNode);
+
+      if(tile.selected) {
+        hexNode = new Sprite(ui.sprites['hexagon_brown.png']);
+        color = Board.COLOR_SELECTED;
+      }
+      else{
+        switch(tile.color){
+
+          case Board.COLOR_NONE:
+            hexNode = new Sprite(ui.sprites['hexagon_beige.png']);
+            color = Board.COLOR_NONE;
+            break;
+
+          case Board.COLOR_RED:
+            hexNode = new Sprite(ui.sprites['hexagon_red.png']);
+            color = Board.COLOR_RED;
+            break;
+
+          case Board.COLOR_BLUE:
+            hexNode = new Sprite(ui.sprites['hexagon_blue.png']);
+            color = Board.COLOR_BLUE;
+            break;
+
+          case Board.COLOR_PURPLE:
+            hexNode = new Sprite(ui.sprites['hexagon_purple.png']);
+            color = Board.COLOR_PURPLE;
+            break;
+
+          case Board.COLOR_GOLD:
+            hexNode = new Sprite(ui.sprites['hexagon_gold.png']);
+            color = Board.COLOR_GOLD;
+            break;
+
+          case Board.COLOR_GREY:
+            hexNode = new Sprite(ui.sprites['hexagon_grey.png']);
+            color = Board.COLOR_GREY;
+            break;
+
+        }
+
+      }
+
+      addChild(hexNode);
+    }
+
+    if(ui.letters[tile.k] != letter || letterChange){
+
+      twistNode.removeChild(letterSprite);
+
+      switch(color){
+        case Board.COLOR_SELECTED:
+        case Board.COLOR_GOLD:
+        case Board.COLOR_PURPLE:
+        case Board.COLOR_BLUE:
+        case Board.COLOR_RED:
+        letterSprite = new Sprite(getLetter(ui.whiteFont));
+        break;
+
+        default:
+          letterSprite = new Sprite(getLetter(ui.blackFont));
+          break;
+
+      }
+
+      twistNode = new Node();
+      twistNode.rotation = 270;
+      if(portrait) rotation = 90;
+      addChild(twistNode);
+
+      twistNode.addChild(letterSprite);
+
+    }
+
+
+  }
 
   double lastX;
   double lastY;
@@ -163,76 +247,7 @@ class Hexagon extends NodeWithSize {
     return null;
   }
 
-  redraw(){
-
-   draw();
-  }
 
 
-  setColor(){
-
-   if(tile.selected){
-
-     if(color == Board.COLOR_SELECTED) {
-
-    // do nothing
-
-     } else {
-
-       hex = new Sprite(ui.sprites['hexagon_brown.png']);
-       letter = new Sprite(getLetter(ui.whiteFont));
-
-       color = SL.Board.COLOR_SELECTED;
-
-     }
-
-   } else {
-
-     switch(tile.color){
-
-       case Board.COLOR_NONE:
-         hex = new Sprite(ui.sprites['hexagon_beige.png']);
-         letter = new Sprite(getLetter(ui.blackFont));
-         color = Board.COLOR_NONE;
-         break;
-
-       case Board.COLOR_RED:
-         hex = new Sprite(ui.sprites['hexagon_red.png']);
-         letter = new Sprite(getLetter(ui.whiteFont));
-         color = Board.COLOR_RED;
-         break;
-
-       case Board.COLOR_BLUE:
-         hex = new Sprite(ui.sprites['hexagon_blue.png']);
-         letter = new Sprite(getLetter(ui.whiteFont));
-         color = Board.COLOR_BLUE;
-         break;
-
-       case Board.COLOR_PURPLE:
-         hex = new Sprite(ui.sprites['hexagon_purple.png']);
-         letter = new Sprite(getLetter(ui.whiteFont));
-         color = Board.COLOR_PURPLE;
-         break;
-
-       case Board.COLOR_GOLD:
-         hex = new Sprite(ui.sprites['hexagon_gold.png']);
-         letter = new Sprite(getLetter(ui.whiteFont));
-         color = Board.COLOR_GOLD;
-         break;
-
-       case Board.COLOR_GREY:
-         hex = new Sprite(ui.sprites['hexagon_gre.png']);
-         letter = new Sprite(getLetter(ui.blackFont));
-         color = Board.COLOR_GREY;
-         break;
-
-     }
-
-
-   }
-
-
- }
-  
   
 }

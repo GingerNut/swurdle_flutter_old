@@ -60,7 +60,9 @@ class GameBoardState extends State<GameBoard> {
 
     hexagons.forEach((h)=> board.addChild(h) );
 
-   draw();
+    hexagons.forEach((h) => h.initialise());
+
+    valid = true;
   }
 
   @override
@@ -72,11 +74,9 @@ class GameBoardState extends State<GameBoard> {
 
   void draw(){
 
-    hexagons.forEach((h) => h.redraw());
+    hexagons.forEach((h) => h.refresh());
 
     valid = true;
-
-    print(ui.game.position.words.length);
 
   }
 
