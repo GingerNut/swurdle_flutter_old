@@ -90,58 +90,60 @@ class Hexagon extends NodeWithSize {
 
   refresh(){
 
-    bool letterChange = false;
+    bool colorChange = false;
 
     if(color != tile.color){
 
-      letterChange = true;
+      colorChange = true;
       removeChild(hexNode);
+      color = tile.color;
 
-      if(tile.selected) {
-        hexNode = new Sprite(ui.sprites['hexagon_brown.png']);
-        color = Board.COLOR_SELECTED;
-      }
-      else{
         switch(tile.color){
 
           case Board.COLOR_NONE:
             hexNode = new Sprite(ui.sprites['hexagon_beige.png']);
-            color = Board.COLOR_NONE;
             break;
 
           case Board.COLOR_RED:
             hexNode = new Sprite(ui.sprites['hexagon_red.png']);
-            color = Board.COLOR_RED;
             break;
 
           case Board.COLOR_BLUE:
             hexNode = new Sprite(ui.sprites['hexagon_blue.png']);
-            color = Board.COLOR_BLUE;
             break;
 
           case Board.COLOR_PURPLE:
-            hexNode = new Sprite(ui.sprites['hexagon_purple.png']);
-            color = Board.COLOR_PURPLE;
+            hexNode = new Sprite(ui.sprites['hexagon_pink.png']);
             break;
 
           case Board.COLOR_GOLD:
-            hexNode = new Sprite(ui.sprites['hexagon_gold.png']);
-            color = Board.COLOR_GOLD;
+            hexNode = new Sprite(ui.sprites['hexagon_yellow.png']);
             break;
 
           case Board.COLOR_GREY:
             hexNode = new Sprite(ui.sprites['hexagon_grey.png']);
-            color = Board.COLOR_GREY;
+            break;
+
+          case Board.COLOR_SELECTED:
+            hexNode = new Sprite(ui.sprites['hexagon_brown.png']);
+            break;
+
+          case Board.COLOR_WORD_BAD:
+            hexNode = new Sprite(ui.sprites['hexagon_brown.png']);
+            break;
+
+          case Board.COLOR_WORD_GOOD:
+            hexNode = new Sprite(ui.sprites['hexagon_green.png']);
             break;
 
         }
 
-      }
-
       addChild(hexNode);
     }
 
-    if(ui.letters[tile.k] != letter || letterChange){
+    if(ui.letters[tile.k] != letter || colorChange){
+
+      letter = ui.letters[tile.k];
 
       twistNode.removeChild(letterSprite);
 
@@ -151,6 +153,8 @@ class Hexagon extends NodeWithSize {
         case Board.COLOR_PURPLE:
         case Board.COLOR_BLUE:
         case Board.COLOR_RED:
+        case Board.COLOR_WORD_BAD:
+        case Board.COLOR_WORD_GOOD:
         letterSprite = new Sprite(getLetter(ui.whiteFont));
         break;
 
