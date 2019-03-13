@@ -81,7 +81,7 @@ class Hexagon extends NodeWithSize {
 
 
     letterSprite = new Sprite(getLetter(ui.blackFont));
-    letter = ui.letters[tile.k];
+    letter = tile.letter;
     twistNode.addChild(letterSprite);
 
     scale = defaultScale;
@@ -141,9 +141,9 @@ class Hexagon extends NodeWithSize {
       addChild(hexNode);
     }
 
-    if(ui.letters[tile.k] != letter || colorChange){
+    if(tile.letter != letter || colorChange){
 
-      letter = ui.letters[tile.k];
+      letter = tile.letter;
 
       twistNode.removeChild(letterSprite);
 
@@ -219,7 +219,7 @@ class Hexagon extends NodeWithSize {
   
   SpriteTexture getLetter(SpriteSheet sheet){
        
-    switch(ui.letters[tile.k]){
+    switch(tile.letter){
       case 'A': return sheet['a.png'];
       case 'B': return sheet['b.png'];
       case 'C': return sheet['c.png'];
