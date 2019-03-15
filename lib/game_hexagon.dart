@@ -8,12 +8,10 @@ import 'package:spritewidget/spritewidget.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_board.dart';
 import 'package:swurdlelogic/swurdlelogic.dart' as SL;
-import 'package:swurdlelogic/swurdlelogic.dart';
 
 class Hexagon extends NodeWithSize {
 
   final FlutterInterface ui;
-  final SL.Position pos;
   final SL.Tile tile;
   final bool portrait;
    double hexSize;
@@ -24,7 +22,8 @@ class Hexagon extends NodeWithSize {
    Node hexNode;
    Node twistNode;
    Sprite letterSprite;
-    Sprite springSprite;
+   Sprite springSprite;
+
 
   double minX;
   double minY;
@@ -45,7 +44,7 @@ class Hexagon extends NodeWithSize {
   double _y;
 
 
-  Hexagon(this.ui, this.pos, this.tile, this.portrait) : super(null){
+  Hexagon(this.ui, this.tile, this.portrait) : super(null){
 
     setVariables();
 
@@ -108,39 +107,39 @@ class Hexagon extends NodeWithSize {
 
         switch(tile.color){
 
-          case Board.COLOR_NONE:
+          case SL.Board.COLOR_NONE:
             hexNode = new Sprite(ui.sprites['hexagon_beige.png']);
             break;
 
-          case Board.COLOR_RED:
+          case SL.Board.COLOR_RED:
             hexNode = new Sprite(ui.sprites['hexagon_red.png']);
             break;
 
-          case Board.COLOR_BLUE:
+          case SL.Board.COLOR_BLUE:
             hexNode = new Sprite(ui.sprites['hexagon_blue.png']);
             break;
 
-          case Board.COLOR_PURPLE:
+          case SL.Board.COLOR_PURPLE:
             hexNode = new Sprite(ui.sprites['hexagon_pink.png']);
             break;
 
-          case Board.COLOR_GOLD:
+          case SL.Board.COLOR_GOLD:
             hexNode = new Sprite(ui.sprites['hexagon_yellow.png']);
             break;
 
-          case Board.COLOR_GREY:
+          case SL.Board.COLOR_GREY:
             hexNode = new Sprite(ui.sprites['hexagon_grey.png']);
             break;
 
-          case Board.COLOR_SELECTED:
+          case SL.Board.COLOR_SELECTED:
             hexNode = new Sprite(ui.sprites['hexagon_brown.png']);
             break;
 
-          case Board.COLOR_WORD_BAD:
+          case SL.Board.COLOR_WORD_BAD:
             hexNode = new Sprite(ui.sprites['hexagon_brown.png']);
             break;
 
-          case Board.COLOR_WORD_GOOD:
+          case SL.Board.COLOR_WORD_GOOD:
             hexNode = new Sprite(ui.sprites['hexagon_green.png']);
             break;
 
@@ -150,28 +149,41 @@ class Hexagon extends NodeWithSize {
     }
 
     SL.Spring spring = tile.spring;
+
     if(spring != null){
-      switch(spring.player.color){
 
-        case Board.COLOR_RED: springSprite = new Sprite(ui.sprites['star_red.png']);
-        break;
+      if(springSprite == null){
 
-        case Board.COLOR_BLUE: springSprite = new Sprite(ui.sprites['star_blue.png']);
-        break;
+        switch (spring.player.color) {
+          case SL.Board.COLOR_RED:
+            springSprite = new Sprite(ui.sprites['star_red.png']);
+            break;
 
-        case Board.COLOR_PURPLE: springSprite = new Sprite(ui.sprites['star_red.png']);
-        break;
+          case SL.Board.COLOR_BLUE:
+            springSprite = new Sprite(ui.sprites['star_blue.png']);
+            break;
 
-        case Board.COLOR_GOLD: springSprite = new Sprite(ui.sprites['star_red.png']);
-        break;
+          case SL.Board.COLOR_PURPLE:
+            springSprite = new Sprite(ui.sprites['star_red.png']);
+            break;
 
+          case SL.Board.COLOR_GOLD:
+            springSprite = new Sprite(ui.sprites['star_red.png']);
+            break;
+        }
+
+        addChild(springSprite);
+
+      } else {
+
+        removeChild(springSprite);
       }
 
-      addChild(springSprite);
 
       colorChange = true;
-
     }
+
+
 
     if(tile.letter != letter || colorChange){
 
@@ -180,13 +192,13 @@ class Hexagon extends NodeWithSize {
       twistNode.removeChild(letterSprite);
 
       switch(color){
-        case Board.COLOR_SELECTED:
-        case Board.COLOR_GOLD:
-        case Board.COLOR_PURPLE:
-        case Board.COLOR_BLUE:
-        case Board.COLOR_RED:
-        case Board.COLOR_WORD_BAD:
-        case Board.COLOR_WORD_GOOD:
+        case SL.Board.COLOR_SELECTED:
+        case SL.Board.COLOR_GOLD:
+        case SL.Board.COLOR_PURPLE:
+        case SL.Board.COLOR_BLUE:
+        case SL.Board.COLOR_RED:
+        case SL.Board.COLOR_WORD_BAD:
+        case SL.Board.COLOR_WORD_GOOD:
         letterSprite = new Sprite(getLetter(ui.whiteFont));
         break;
 
