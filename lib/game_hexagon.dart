@@ -35,7 +35,7 @@ class Hexagon extends NodeWithSize {
   static const spacing = 16.0;
   static const root3over2 = 0.8660254037844;
 
-  double defaultScale;
+ static double defaultScale;
 
   double homeX;
   double homeY;
@@ -177,6 +177,8 @@ class Hexagon extends NodeWithSize {
       } else {
 
         removeChild(springSprite);
+
+        addChild(springSprite);
       }
 
 

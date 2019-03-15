@@ -24,7 +24,7 @@ class Spring extends NodeWithSize {
 
     position = Offset(hexagon.homeX, hexagon.homeY);
 
-    scale = hexagon.defaultScale;
+    scale = Hexagon.defaultScale;
 
     setSprite();
   }

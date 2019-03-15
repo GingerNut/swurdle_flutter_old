@@ -65,16 +65,7 @@ class Board extends NodeWithSize{
     return hex;
   }
 
-  Hexagon identifyHexFromTile(Tile tile){
-    Hexagon hex;
-
-    hexagons.forEach((h) {
-      if(h.tile == tile) hex = h;
-    });
-
-    return hex;
-
-  }
+  Hexagon identifyHexFromTile(Tile tile) => hexagons[tile.k];
 
   refreshTiles(){
     hexagons.forEach((h) {

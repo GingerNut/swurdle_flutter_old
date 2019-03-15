@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:swurdle_flutter/arrow.dart';
 import 'package:swurdle_flutter/board.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_hexagon.dart';
@@ -76,6 +77,14 @@ class GameBoardState extends State<GameBoard> {
   void draw(){
 
     hexagons.forEach((h) => h.refresh());
+
+    position.words.words.forEach((w){
+
+
+      board.addChild(Arrow(ui, board, w));
+
+
+    });
 
     valid = true;
 
