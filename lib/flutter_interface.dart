@@ -15,6 +15,7 @@ class FlutterInterface extends Interface{
   SpriteSheet whiteFont;
 
   GameBoardState state;
+  bool portrait = true;
 
   AssetBundle bundle;
 

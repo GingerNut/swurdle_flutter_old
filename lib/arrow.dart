@@ -48,27 +48,47 @@ class Arrow extends NodeWithSize {
 
     for(int i = 1 ; i < word.tiles.length -1 ; i ++){
 
-      Sprite segment;
+      Sprite back;
 
       switch(word.color){
 
-        case SL.Board.COLOR_RED: segment = Sprite(ui.sprites['red_arrow_segment.png']);
+        case SL.Board.COLOR_RED: back = Sprite(ui.sprites['red_arrow_base.png']);
         break;
 
-        case SL.Board.COLOR_BLUE: segment = Sprite(ui.sprites['blue_arrow_segment.png']);
+        case SL.Board.COLOR_BLUE: back = Sprite(ui.sprites['blue_arrow_base.png']);
         break;
 
-        case SL.Board.COLOR_GREY: segment = Sprite(ui.sprites['grey_arrow_segment.png']);
+        case SL.Board.COLOR_GREY: back = Sprite(ui.sprites['grey_arrow_base.png']);
         break;
       }
 
-      segment.position = offset(word.tiles[i]);
-      segment.scale = Hexagon.defaultScale;
-      segment.rotation = orientation(word.tiles[i-1], word.tiles[i]);
-      addChild(segment);
+      back.position = offset(word.tiles[i]);
+      back.scale = Hexagon.defaultScale;
+      back.rotation = orientation(word.tiles[i], word.tiles[i-1] );
+      addChild(back);
+      
+
+      Sprite forward;
+
+      switch(word.color){
+
+        case SL.Board.COLOR_RED: forward = Sprite(ui.sprites['red_arrow_segment.png']);
+        break;
+
+        case SL.Board.COLOR_BLUE: forward = Sprite(ui.sprites['blue_arrow_segment.png']);
+        break;
+
+        case SL.Board.COLOR_GREY: forward = Sprite(ui.sprites['grey_arrow_segment.png']);
+        break;
+      }
+
+      forward.position = offset(word.tiles[i]);
+      forward.scale = Hexagon.defaultScale;
+      forward.rotation = orientation(word.tiles[i-1], word.tiles[i]);
+      addChild(forward);
 
 
-      segments.add(segment);
+      segments.add(forward);
 
     }
 
@@ -96,21 +116,30 @@ class Arrow extends NodeWithSize {
 
   double orientation (SL.Tile first, SL.Tile second){
 
+    double rotation = 180;
+
       Hexagon hexOne = board.identifyHexFromTile(first);
       Hexagon hexTwo = board.identifyHexFromTile(second);
 
-      return acos((hexOne.position.dx - hexTwo.position.dx)/(hexOne.position.dy - hexTwo.position.dy));
+      if(ui.portrait){
+
+        if(hexTwo.homeX == hexOne.homeX){
+          rotation += (hexTwo.homeY > hexOne.homeY) ?  0 : 180 ;
+        } else if(hexTwo.homeY == hexOne.homeY ){
+          rotation += (hexTwo.homeX > hexOne.homeX) ?  90 : 270 ;
+
+        } else rotation += atan((hexTwo.homeY - hexOne.homeY)/(hexTwo.homeX - hexOne.homeX));
+
+      }
+
+     return rotation;
   }
 
   Offset offset(SL.Tile tile){
 
-
     Hexagon hex = board.identifyHexFromTile(tile);
 
-
     return Offset(hex.homeX - homeX, hex.homeY - homeY);
-
-
   }
 
 

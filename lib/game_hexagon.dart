@@ -14,7 +14,6 @@ class Hexagon extends NodeWithSize {
 
   final FlutterInterface ui;
   final SL.Tile tile;
-  final bool portrait;
    double hexSize;
 
    int color;
@@ -45,7 +44,7 @@ class Hexagon extends NodeWithSize {
   double _y;
 
 
-  Hexagon(this.ui, this.tile, this.portrait) : super(null){
+  Hexagon(this.ui, this.tile) : super(null){
 
     setVariables();
 
@@ -71,25 +70,20 @@ class Hexagon extends NodeWithSize {
 
   initialise(){
 
-
-
-
     hexNode = new Sprite(ui.sprites['hexagon_beige.png']);
     color = tile.color;
     addChild(hexNode);
 
-
-
     twistNode = new Node();
     twistNode.rotation = 270;
-    if(portrait) rotation = 90;
+    if(ui.portrait) rotation = 90;
     addChild(twistNode);
 
 
     letterSprite = new Sprite(getLetter(ui.blackFont));
     letter = tile.letter;
     twistNode.addChild(letterSprite);
-    twistNode.zPosition = Board.Z_LETTER;
+
 
     scale = defaultScale;
 
@@ -214,10 +208,11 @@ class Hexagon extends NodeWithSize {
 
       twistNode = new Node();
       twistNode.rotation = 270;
-      if(portrait) rotation = 90;
+      if(ui.portrait) rotation = 90;
       addChild(twistNode);
 
       twistNode.addChild(letterSprite);
+
 
     }
 

@@ -42,7 +42,7 @@ class _MyHomePageState extends State<GameScreen> {
           Navigator.pop(context); // close the drawer
         },
       ),
-      body: GameBoard(game.ui, true),
+      body: GameBoard(game.ui),
 
       backgroundColor : const Color(0xFF4caf50),
 

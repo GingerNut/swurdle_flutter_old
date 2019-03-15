@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:swurdle_flutter/arrow.dart';
+import 'package:swurdle_flutter/arrow_vector.dart';
 import 'package:swurdle_flutter/board.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_hexagon.dart';
@@ -17,32 +18,30 @@ class GameBoard extends StatefulWidget {
   static const VERTICAL_SIZE = 800.0;
   static const HORIZONTAL_SIZE = 600.0;
 
-  final bool portrait;
   final FlutterInterface ui;
 
 
   final List<Hexagon> hexagons = new List();
 
-  GameBoard(this.ui, this.portrait);
+  GameBoard(this.ui);
 
   void invalidate(){
 
   }
 
   @override
-  GameBoardState createState() => new GameBoardState(ui, portrait, hexagons);
+  GameBoardState createState() => new GameBoardState(ui, hexagons);
 }
 
 class GameBoardState extends State<GameBoard> {
   Board board;
 
   bool valid = true;
-  final bool portrait;
   SL.Position get position => ui.game.position;
   final FlutterInterface ui;
   List<Hexagon> hexagons;
 
-  GameBoardState(this.ui,this.portrait, this.hexagons){
+  GameBoardState(this.ui, this.hexagons){
     ui.register(this);
   }
 
@@ -57,7 +56,7 @@ class GameBoardState extends State<GameBoard> {
 
     board.addChild(backGround );
 
-    position.tiles.forEach((t)=> hexagons. add(Hexagon(ui, t, portrait)));
+    position.tiles.forEach((t)=> hexagons. add(Hexagon(ui, t)));
 
     hexagons.forEach((h)=> board.addChild(h) );
 
@@ -81,7 +80,7 @@ class GameBoardState extends State<GameBoard> {
     position.words.words.forEach((w){
 
 
-      board.addChild(Arrow(ui, board, w));
+      board.addChild(ArrowVector(ui, board, w));
 
 
     });
