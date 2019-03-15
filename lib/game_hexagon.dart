@@ -5,6 +5,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:spritewidget/spritewidget.dart';
+import 'package:swurdle_flutter/board.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_board.dart';
 import 'package:swurdlelogic/swurdlelogic.dart' as SL;
@@ -88,6 +89,7 @@ class Hexagon extends NodeWithSize {
     letterSprite = new Sprite(getLetter(ui.blackFont));
     letter = tile.letter;
     twistNode.addChild(letterSprite);
+    twistNode.zPosition = Board.Z_LETTER;
 
     scale = defaultScale;
 

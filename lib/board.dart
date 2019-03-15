@@ -8,6 +8,13 @@ import 'package:swurdle_flutter/game_hexagon.dart';
 import 'package:swurdlelogic/swurdlelogic.dart';
 
 class Board extends NodeWithSize{
+
+  static const Z_HEXAGON = 0.0;
+  static const Z_WORD = 1.0;
+  static const Z_LETTER = 2.0;
+
+
+
   final List<Hexagon> hexagons;
   Position pos;
   final FlutterInterface ui;
