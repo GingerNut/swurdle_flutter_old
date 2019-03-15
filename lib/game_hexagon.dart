@@ -24,6 +24,7 @@ class Hexagon extends NodeWithSize {
    Node hexNode;
    Node twistNode;
    Sprite letterSprite;
+    Sprite springSprite;
 
   double minX;
   double minY;
@@ -70,9 +71,14 @@ class Hexagon extends NodeWithSize {
 
   initialise(){
 
+
+
+
     hexNode = new Sprite(ui.sprites['hexagon_beige.png']);
     color = tile.color;
     addChild(hexNode);
+
+
 
     twistNode = new Node();
     twistNode.rotation = 270;
@@ -87,6 +93,8 @@ class Hexagon extends NodeWithSize {
     scale = defaultScale;
 
   }
+
+
 
   refresh(){
 
@@ -139,6 +147,30 @@ class Hexagon extends NodeWithSize {
         }
 
       addChild(hexNode);
+    }
+
+    SL.Spring spring = tile.spring;
+    if(spring != null){
+      switch(spring.player.color){
+
+        case Board.COLOR_RED: springSprite = new Sprite(ui.sprites['star_red.png']);
+        break;
+
+        case Board.COLOR_BLUE: springSprite = new Sprite(ui.sprites['star_blue.png']);
+        break;
+
+        case Board.COLOR_PURPLE: springSprite = new Sprite(ui.sprites['star_red.png']);
+        break;
+
+        case Board.COLOR_GOLD: springSprite = new Sprite(ui.sprites['star_red.png']);
+        break;
+
+      }
+
+      addChild(springSprite);
+
+      colorChange = true;
+
     }
 
     if(tile.letter != letter || colorChange){
