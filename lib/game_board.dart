@@ -3,12 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:swurdle_flutter/arrow.dart';
 import 'package:swurdle_flutter/arrow_vector.dart';
 import 'package:swurdle_flutter/board.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_hexagon.dart';
-import 'package:swurdle_flutter/game_spring.dart';
 import 'package:swurdlelogic/swurdlelogic.dart' as SL;
 import 'package:spritewidget/spritewidget.dart';
 

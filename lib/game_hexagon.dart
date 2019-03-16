@@ -5,7 +5,6 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:spritewidget/spritewidget.dart';
-import 'package:swurdle_flutter/board.dart';
 import 'package:swurdle_flutter/flutter_interface.dart';
 import 'package:swurdle_flutter/game_board.dart';
 import 'package:swurdlelogic/swurdlelogic.dart' as SL;
@@ -240,15 +239,15 @@ class Hexagon extends NodeWithSize {
 
 
 
-    hexSize = min(GameBoard.HORIZONTAL_SIZE / SL.size * root3over2 /1.63, GameBoard.VERTICAL_SIZE/ SL.size * root3over2 / 1.45);
+    hexSize = min(GameBoard.HORIZONTAL_SIZE / ui.game.size * root3over2 /1.63, GameBoard.VERTICAL_SIZE/ ui.game.size * root3over2 / 1.45);
 
     hexSize /= 1.8;
 
     double hexagonSpacingVertical = hexSize * (2 + padding * 2) * root3over2;
     double hexagonSpacingHorizontal = hexSize * (2 + padding * 2) * horizontal_packing;
 
-    double horizontalPadding = (GameBoard.HORIZONTAL_SIZE - hexagonSpacingHorizontal * SL.size)/2;
-    double verticalPadding = (GameBoard.VERTICAL_SIZE - hexagonSpacingVertical * SL.size)/2 ;
+    double horizontalPadding = (GameBoard.HORIZONTAL_SIZE - hexagonSpacingHorizontal * ui.game.size)/2;
+    double verticalPadding = (GameBoard.VERTICAL_SIZE - hexagonSpacingVertical * ui.game.size)/2 ;
 
 
 

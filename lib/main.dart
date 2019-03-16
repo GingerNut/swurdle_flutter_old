@@ -25,7 +25,7 @@ main() async {
 
   await game.setUp();
 
-  game.newGame();
+  game.newGame(7);
 
   runApp(MyApp(game));
 }
